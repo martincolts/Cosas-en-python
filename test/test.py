@@ -1,4 +1,4 @@
-import csv
+"""import csv
 with open("00f1221ebf94129c8d4643d1542ebd4c1fabf9d5.csv", 'rb') as csvfile:
     spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
     bateryLevel = 0
@@ -25,4 +25,16 @@ with open("00f1221ebf94129c8d4643d1542ebd4c1fabf9d5.csv", 'rb') as csvfile:
 with open('result.csv', 'wb') as csvfile:
     spamwriter = csv.writer(csvfile, delimiter=';',quotechar='|', quoting=csv.QUOTE_MINIMAL)
     for rowL in list:
-        spamwriter.write(rowL[0], rowL[1])
+        spamwriter.write()"""
+
+from reader import *
+reader = ReaderConcret ()
+list = []
+reader.readFile("in.csv" , list)
+
+print "Start writing"
+
+with open('result.csv', 'wb') as csvfile:
+    spamwriter = csv.writer(csvfile, delimiter=';',quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    for rowL in list:
+        spamwriter.writerow(rowL)
