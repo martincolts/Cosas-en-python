@@ -27,14 +27,32 @@ with open('result.csv', 'wb') as csvfile:
     for rowL in list:
         spamwriter.write()"""
 
-from reader import *
+
+import csv
+from Reader.ReaderConcret import ReaderConcret
+from Reader.ReaderDecorator.BateryDecorator import BateryDecorator
+from Reader.ReaderDecorator.WifiDecorator import WifiDecorator
+
 reader = ReaderConcret ()
+reader = BateryDecorator (reader)
+reader = WifiDecorator (reader)
 list = []
-reader.readFile("in.csv" , list)
+listResult = []
+with open('in.csv', 'rb') as csvfile:
+    spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
+    for row in spamreader:
+        listResult.append(reader.read(row ))
 
 print "Start writing"
-
+print listResult
+list2 = [v for v in listResult if v[2] != 0]
+print list2
 with open('result.csv', 'wb') as csvfile:
     spamwriter = csv.writer(csvfile, delimiter=';',quotechar='|', quoting=csv.QUOTE_MINIMAL)
-    for rowL in list:
+    for rowL in list2:
+        spamwriter.writerow(rowL)
+
+with open('resultComplete.csv', 'wb') as csvfile:
+    spamwriter = csv.writer(csvfile, delimiter=';',quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    for rowL in listResult:
         spamwriter.writerow(rowL)

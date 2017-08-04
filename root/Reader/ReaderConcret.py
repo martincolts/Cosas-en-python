@@ -1,13 +1,14 @@
-from reader import *
-import csv
+from Reader import Reader
 
 class ReaderConcret(Reader):
 
     def __init__ (self):
+        Reader.__init__(self)
         pass
 
-    def readFile(self , filePath , list):
-        rowList = []
+    def read (self, row ):
+        self.rowList = []
+        """rowList = []
         with open(filePath, 'rb') as csvfile:
             spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
             bateryLevel = 0
@@ -28,5 +29,7 @@ class ReaderConcret(Reader):
                     rowList.append(bateryLevel)
                     rowList.append(wifiStatus)
                     list.append(rowList)
-                    rowList = []
-        return rowList
+                    rowList = []"""
+        self.rowList.append(row[0])
+        self.rowList.append(row[2])
+        return self.rowList

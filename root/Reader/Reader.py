@@ -1,12 +1,11 @@
-import csv
 from abc import ABCMeta , abstractmethod
-
-class Reader:
+class Reader(object):
     __metaclass__ = ABCMeta
 
     def __init__(self ):
+        self.rowList = []
         pass
 
     @abstractmethod
-    def readFile (self):
+    def read (self , row ):
         pass
